@@ -1,11 +1,9 @@
 // Враг.
 
 class Enemy {
-  constructor(trackLength) {
+  constructor({ position }) {
     this.generateSkin();
-    // this.position = 2;
-    this.position = trackLength - 1;
-    this.isAlive = true;
+    this.position = position;
   }
 
   generateSkin() {
