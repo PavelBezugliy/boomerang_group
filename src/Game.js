@@ -46,12 +46,13 @@ class Game {
     }
   }
 
-  play() {
+   play() {
 
     const name = process.argv[2];
+    this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
+    
     setInterval(() => {
       this.enemy.moveLeft();
-      this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
       this.check();
       this.regenerateTrack();
       this.view.render(this.track, this.count, name, this.hero.position);
