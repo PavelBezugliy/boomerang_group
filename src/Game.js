@@ -43,17 +43,30 @@ class Game {
       this.enemy.position = 99;
       this.enemy.generateSkin();
       this.count += 10;
+      this.boomerang.die();
     }
+    if (
+      this.boomerang.position > this.hero.position + 10 ||
+      this.boomerang.position < this.hero.position
+    ) {
+      this.boomerang.die();
+    }
+    if (this.boomerang.position === '?') {
+      this.track[this.boomerang.position] = this.boomerang.skin;
+      this.boomerang.position = this.hero.position;
+    }
+  }
 
-    // if (this.boomerang.die()) {
-    //   this.boomerang.moveLeft();
-    // }
+  sound() {
+    player.play('src/sounds/bg_music.mp3', (err) => {
+      if (err) console.log(err);
+    });
   }
 
   play() {
     const name = process.argv[2];
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
-    
+
     setInterval(() => {
       this.enemy.moveLeft();
       this.check();

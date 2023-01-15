@@ -1,4 +1,9 @@
 // Наш герой.
+
+const cfonts = require('cfonts');
+
+const prettyFont = cfonts.render('You DIED!', { background: 'transparent' }).array.join('\n');
+
 const player = require('play-sound')((opts = {}));
 const chalk = require('chalk');
 
@@ -24,7 +29,7 @@ class Hero {
 
   die() {
     this.skin = '💀';
-    console.log(chalk.red('                                       Жалкое ничтожество!💀'));
+    console.log(chalk.red(prettyFont));
     console.log('\n');
     player.play('src/sounds/congratulations.wav', (err) => {
       if (err) console.log(err);

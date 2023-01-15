@@ -1,5 +1,3 @@
-
-
 // Враг.
 const player = require('play-sound')((opts = {}));
 
