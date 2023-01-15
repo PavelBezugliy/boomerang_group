@@ -30,6 +30,9 @@ class Keyboards {
         if (key.name === 'e') {
           strelba.moveRight();
         }
+        // if (key.name === '88') {
+        //   console.log('успех');
+        // }
         // Прерывание программы.
         if (key.ctrl && key.name === 'c') {
           process.exit();

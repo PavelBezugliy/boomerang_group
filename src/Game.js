@@ -1,7 +1,7 @@
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
-const fs = require('fs');
+
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
 const Boomerang = require('./game-models/Boomerang');
@@ -15,9 +15,9 @@ const View = require('./View');
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
-    this.hero = new Hero({ position: 5 }); // Герою можно аргументом передать бумеранг.
+    this.hero = new Hero(); // Герою можно аргументом передать бумеранг.
     this.enemy = new Enemy({ position: 99 });
-    this.boomerang = new Boomerang({ position: 5 });
+    this.boomerang = new Boomerang({ position: this.hero.position });
     this.view = new View();
     this.keyboard = new Keyboards();
     this.track = [];
@@ -29,9 +29,9 @@ class Game {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
     this.track = (new Array(this.trackLength)).fill(' ');
-    this.track[this.hero.position] = this.hero.skin;
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
+    this.track[this.hero.position] = this.hero.skin;
   }
 
   check() {
@@ -47,14 +47,14 @@ class Game {
   }
 
   play() {
-fs.readFileSync('fun.mp3')
+
     const name = process.argv[2];
     setInterval(() => {
       this.enemy.moveLeft();
       this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
       this.check();
       this.regenerateTrack();
-      this.view.render(this.track, this.count, name);
+      this.view.render(this.track, this.count, name, this.hero.position);
     }, 200);
   }
 }
