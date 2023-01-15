@@ -9,17 +9,23 @@ class Boomerang {
   }
 
   fly() {
-    this.moveRight();
-    this.moveLeft();
+    setInterval(() => {
+      this.moveRight();
+    }, 200);
+  }
+  clear(){
+    clearInterval()
   }
 
   moveLeft() {
-    // Идём влево.
     this.position -= 1;
   }
 
   moveRight() {
     this.position += 1;
+  }
+  die() {
+    this.position = '?';
   }
 }
 
