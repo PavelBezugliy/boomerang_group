@@ -3,49 +3,43 @@
 // Главное не используй всё вместе!
 
 const keypress = require('keypress');
-// const Hero = require('./game-models/Hero');
-
 // Управление.
 // Настроим соответствия нажатий на клавиши и действий в игре.
 
 // const keyboard = {
-//   q: () => console.log('q'),
-//   w: () => console.log('w'),
-//   e: () => console.log('e'),
+//   q: () => this.hero.moveLeft(),
+//   w: () => this.hero.moveRight(),
+//   e: () => this.boomerang.moveRight(),
 //   r: () => console.log('r'),
 //   t: () => console.log('t'),
 //   y: () => console.log('y'),
 // };
-
-// Какая-то функция.
-
-function runInteractiveConsole() {
-  keypress(process.stdin);
-  process.stdin.on('keypress', (ch, key) => {
-    if (key) {
-      // Вызывает команду, соответствующую нажатой кнопке.
-      // if (key.name in keyboard) {
-      //   keyboard[key.name]();
-      // }
-
-      if (key.name === 'e') {
-        this.hero.moveRight();
+class Keyboards {
+  runInteractiveConsole(hodba, strelba) {
+    keypress(process.stdin);
+    process.stdin.on('keypress', (ch, key) => {
+      if (key) {
+        // Вызывает команду, соответствующую нажатой кнопке.
+        if (key.name === 'q') {
+          hodba.moveLeft();
+        }
+        if (key.name === 'w') {
+          hodba.moveRight();
+        }
+        if (key.name === 'e') {
+          strelba.moveRight();
+        }
+        // Прерывание программы.
+        if (key.ctrl && key.name === 'c') {
+          process.exit();
+        }
       }
-      if (key.name === 'q') {
-        this.hero.moveLeft();
-      }
-
-      // Прерывание программы.
-      if (key.ctrl && key.name === 'c') {
-        process.exit();
-      }
-    }
-  });
-  process.stdin.setRawMode(true);
+    });
+    process.stdin.setRawMode(true);
+  }
 }
-
 // Давай попробуем запустить этот скрипт!
 
-runInteractiveConsole();
+// runInteractiveConsole();
 
-module.exports = runInteractiveConsole;
+module.exports = Keyboards;
