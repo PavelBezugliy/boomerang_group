@@ -1,3 +1,5 @@
+
+
 // Враг.
 
 class Enemy {

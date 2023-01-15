@@ -11,15 +11,17 @@ const View = require('./View');
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
 
+
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
-    this.hero = new Hero({ position: 5 }); // Герою можно аргументом передать бумеранг.
-    this.enemy = new Enemy({ position: 100 });
-    this.boomerang = new Boomerang({ position: 5 });
+    this.hero = new Hero(); // Герою можно аргументом передать бумеранг.
+    this.enemy = new Enemy({ position: 99 });
+    this.boomerang = new Boomerang({ position: this.hero.position });
     this.view = new View();
     this.keyboard = new Keyboards();
     this.track = [];
+    this.count = 0;
     this.regenerateTrack();
   }
 
@@ -27,9 +29,9 @@ class Game {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
     this.track = (new Array(this.trackLength)).fill(' ');
-    this.track[this.hero.position] = this.hero.skin;
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
+    this.track[this.hero.position] = this.hero.skin;
   }
 
   check() {
@@ -38,25 +40,22 @@ class Game {
     }
     if (this.boomerang.position === this.enemy.position) {
       this.enemy.die();
-      this.enemy.position = 100;
+      this.enemy.position = 99;
       this.enemy.generateSkin();
+      this.count += 10;
     }
   }
 
-  // spaun() {
-  //   if (this.enemy.position === undefined) {
-  //     new Enemy({ position: 100 });
-  //   }
-  // }
+   play() {
 
-  play() {
+    const name = process.argv[2];
+    this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
+    
     setInterval(() => {
       this.enemy.moveLeft();
-      this.spaun();
-      this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
       this.check();
       this.regenerateTrack();
-      this.view.render(this.track);
+      this.view.render(this.track, this.count, name, this.hero.position);
     }, 200);
   }
 }
