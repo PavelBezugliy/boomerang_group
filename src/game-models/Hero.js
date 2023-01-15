@@ -7,12 +7,12 @@ class Hero {
   }
 
   moveLeft() {
-    // Идём влево.
+  
     this.position -= 1;
   }
 
   moveRight() {
-    // Идём вправо.
+  
     this.position += 1;
   }
 
