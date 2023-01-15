@@ -9,10 +9,8 @@ class View {
     console.log(`                                                                                      Очки героя: ${count}`);
     console.log('\n\n');
     console.log(track.join(''));
-    console.log('\n\n\n');
-    console.log(`Индекс этого пидараса: ${test}`);
-    console.log('=======================================================================================================');
-    console.log('');
+    console.log('\n\n');
+    console.log(`Created by "${yourTeamName}" with love`);
   }
 }
 
