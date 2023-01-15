@@ -2,7 +2,7 @@
 
 class View {
   render(track, count, name) {
-    const yourTeamName = 'Elbrus';
+    const yourTeamName = 'niceTry';
     console.clear();
     console.log('=======================================================================================================');
     console.log(`                                                                                       Имя героя: ${name}`);
@@ -13,6 +13,7 @@ class View {
     console.log('=======================================================================================================');
     console.log(``);
     console.log(`Привет, ${name}! Ходить влево: Q / Ходить вправо: W / Стрелять: E / Выйти из игры: Ctrl + C`);
+    console.log('\n\n\n');
   }
 }
 

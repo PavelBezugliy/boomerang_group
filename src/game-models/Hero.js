@@ -1,4 +1,5 @@
 // Наш герой.
+const player = require('play-sound')((opts = {}));
 
 class Hero {
   constructor() {
@@ -23,6 +24,9 @@ class Hero {
   die() {
     this.skin = '💀';
     console.log('Жалкое ничтожество!💀');
+    player.play('src/sounds/congratulations.wav', (err) => {
+      if (err) console.log(err);
+    });
     process.exit();
   }
 }

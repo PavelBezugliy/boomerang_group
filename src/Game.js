@@ -1,6 +1,7 @@
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
+const player = require('play-sound')((opts = {}));
 
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
@@ -10,7 +11,6 @@ const View = require('./View');
 
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
-
 
 class Game {
   constructor({ trackLength }) {
@@ -28,7 +28,7 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = (new Array(this.trackLength)).fill(' ');
+    this.track = new Array(this.trackLength).fill(' ');
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
     this.track[this.hero.position] = this.hero.skin;
@@ -45,17 +45,25 @@ class Game {
       this.count += 10;
       this.boomerang.die();
     }
-    if (this.boomerang.position > this.hero.position + 10 || this.boomerang.position < this.hero.position) {
+    if (
+      this.boomerang.position > this.hero.position + 10 ||
+      this.boomerang.position < this.hero.position
+    ) {
       this.boomerang.die();
     }
-    if (this.boomerang.position === "?") {
+    if (this.boomerang.position === '?') {
       this.track[this.boomerang.position] = this.boomerang.skin;
       this.boomerang.position = this.hero.position;
     }
   }
 
-  play() {
+  sound() {
+    player.play('src/sounds/bg_music.mp3', (err) => {
+      if (err) console.log(err);
+    });
+  }
 
+  play() {
     const name = process.argv[2];
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
 
@@ -65,6 +73,7 @@ class Game {
       this.regenerateTrack();
       this.view.render(this.track, this.count, name);
     }, 200);
+    this.sound();
   }
 }
 
