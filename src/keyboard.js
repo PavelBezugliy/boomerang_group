@@ -6,15 +6,19 @@ const keypress = require('keypress');
 
 // Управление.
 // Настроим соответствия нажатий на клавиши и действий в игре.
-
-const keyboard = {
-  q: () => console.log('q'),
-  w: () => console.log('w'),
-  e: () => console.log('e'),
-  r: () => console.log('r'),
-  t: () => console.log('t'),
-  y: () => console.log('y'),
-};
+class Run {
+  constructor(hero) {
+    this.hero = hero;
+    this.keyboard = {
+      d: () => this.hero.moveRight(),
+      w: () => console.log('w'),
+      e: () => console.log('e'),
+      r: () => console.log('r'),
+      t: () => console.log('t'),
+      y: () => console.log('y'),
+    };
+  }
+}
 
 // Какая-то функция.
 
@@ -23,8 +27,8 @@ function runInteractiveConsole() {
   process.stdin.on('keypress', (ch, key) => {
     if (key) {
       // Вызывает команду, соответствующую нажатой кнопке.
-      if (key.name in keyboard) {
-        keyboard[key.name]();
+      if (key.name in this.keyboard) {
+        this.keyboard[key.name]();
       }
       // Прерывание программы.
       if (key.ctrl && key.name === 'c') {
@@ -36,5 +40,5 @@ function runInteractiveConsole() {
 }
 
 // Давай попробуем запустить этот скрипт!
-
 runInteractiveConsole();
+module.exports = Run;
