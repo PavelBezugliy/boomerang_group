@@ -10,13 +10,12 @@ class Boomerang {
 
   fly() {
     setInterval(() => {
-      this.moveRight();
+        this.moveRight();
     }, 200);
   }
-  clear(){
-    clearInterval()
-  }
+  clear() {
 
+  }
   moveLeft() {
     this.position -= 1;
   }
