@@ -31,6 +31,7 @@ class Game {
     this.track = (new Array(this.trackLength)).fill(' ');
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
+    this.track[this.boomerang.position] = this.boomerang.skin;
     this.track[this.hero.position] = this.hero.skin;
   }
 
@@ -43,10 +44,18 @@ class Game {
       this.enemy.position = 99;
       this.enemy.generateSkin();
       this.count += 10;
+      this.boomerang.die();
+    }
+    if(this.boomerang.position > this.hero.position + 5 || this.boomerang.position < this.hero.position){
+      this.boomerang.die();
+    }
+    if(this.boomerang.position === "?"){
+      this.track[this.boomerang.position] = this.boomerang.skin;
+      this.boomerang.position = this.hero.position
     }
   }
 
-   play() {
+  play() {
 
     const name = process.argv[2];
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
@@ -55,7 +64,7 @@ class Game {
       this.enemy.moveLeft();
       this.check();
       this.regenerateTrack();
-      this.view.render(this.track, this.count, name, this.hero.position);
+      this.view.render(this.track, this.count, name);
     }, 200);
   }
 }
