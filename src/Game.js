@@ -43,11 +43,11 @@ class Game {
     }
   }
 
-  spaun() {
-    if (this.enemy.position === undefined) {
-      new Enemy({ position: 100 });
-    }
-  }
+  // spaun() {
+  //   if (this.enemy.position === undefined) {
+  //     new Enemy({ position: 100 });
+  //   }
+  // }
 
   play() {
     setInterval(() => {
