@@ -7,13 +7,14 @@ const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 
+const runInteractiveConsole = require('./keyboard');
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
 
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
-    this.hero = new Hero(); // Герою можно аргументом передать бумеранг.
+    this.hero = new Hero({ position: 3 }); // Герою можно аргументом передать бумеранг.
     this.enemy = new Enemy();
     this.view = new View();
     this.track = [];
@@ -39,7 +40,8 @@ class Game {
       this.check();
       this.regenerateTrack();
       this.view.render(this.track);
-    });
+      runInteractiveConsole(this.hero);
+    }, 50);
   }
 }
 
