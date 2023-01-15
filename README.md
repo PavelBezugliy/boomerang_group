@@ -13,7 +13,7 @@
 <img src="readme-assets/xena.jpg" alt="drawing" width="700"/>
 
 
-*Начнём?*
+*Начнём?* нет
 
 
 ## Releases
