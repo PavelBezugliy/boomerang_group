@@ -4,18 +4,21 @@
 
 class Boomerang {
   constructor({ position }) {
-    this.skin = '🌀';
+    this.skin = '🧶';
     this.position = position;
   }
 
   fly() {
-    setInterval(() => {
-      this.moveRight();
-    }, 200);
+    // setInterval(() => {
+    //   this.moveRight();
+    // }, 200);
+
+    this.moveRight();
   }
-  clear(){
-    clearInterval()
-  }
+
+  // clear() {
+  //   clearInterval();
+  // }
 
   moveLeft() {
     this.position -= 1;
@@ -24,6 +27,7 @@ class Boomerang {
   moveRight() {
     this.position += 1;
   }
+
   die() {
     this.position = '?';
   }

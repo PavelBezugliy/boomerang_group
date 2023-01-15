@@ -1,8 +1,11 @@
 // Наш герой.
+const cfonts = require('cfonts');
+
+const prettyFont = cfonts.render('You DIED!', { background: 'transparent' }).array.join('\n');
 
 class Hero {
   constructor() {
-    this.skin = '🤠'; // можете использовать любые emoji '💃'
+    this.skin = '💪😼👉'; // можете использовать любые emoji '💃'
     this.position = 2;
   }
 
@@ -22,7 +25,7 @@ class Hero {
 
   die() {
     this.skin = '💀';
-    console.log('Жалкое ничтожество!💀');
+    console.log(prettyFont);
     process.exit();
   }
 }

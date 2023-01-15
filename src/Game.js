@@ -11,7 +11,6 @@ const View = require('./View');
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
 
-
 class Game {
   constructor({ trackLength }) {
     this.trackLength = trackLength;
@@ -31,7 +30,6 @@ class Game {
     this.track = (new Array(this.trackLength)).fill(' ');
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
-    this.track[this.boomerang.position] = this.boomerang.skin;
     this.track[this.hero.position] = this.hero.skin;
   }
 
@@ -46,20 +44,41 @@ class Game {
       this.count += 10;
       this.boomerang.die();
     }
-    if(this.boomerang.position > this.hero.position + 5 || this.boomerang.position < this.hero.position){
+
+    if (this.boomerang.position > this.hero.position + 15 || this.boomerang.position < this.hero.position) {
       this.boomerang.die();
     }
-    if(this.boomerang.position === "?"){
+
+    // if (this.boomerang.position > this.hero.position + 15) {
+    //   this.boomerang.position.moveLeft();
+    // }
+
+    if (this.boomerang.position === '?') {
       this.track[this.boomerang.position] = this.boomerang.skin;
-      this.boomerang.position = this.hero.position
+      this.boomerang.position = this.hero.position;
     }
+
+    // if (this.boomerang.die()) {
+    //   this.boomerang.moveLeft();
+    // }
   }
 
-  play() {
+  // boomFire() {
+  //   if (this.boomerang.position === '?') {
+  //     this.track[this.boomerang.position] = this.boomerang.skin;
+  //     this.boomerang.position = this.hero.position;
+  //   }
 
+  //   if (this.boomerang.position > this.hero.position + 5) {
+  //     this.boomerang.position.die();
+  //   }
+  // }
+
+  play() {
     const name = process.argv[2];
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
-    
+    // this.boomFire();
+
     setInterval(() => {
       this.enemy.moveLeft();
       this.check();
