@@ -3,42 +3,41 @@
 // Главное не используй всё вместе!
 
 const keypress = require('keypress');
-
 // Управление.
 // Настроим соответствия нажатий на клавиши и действий в игре.
-class Run {
-  constructor(hero) {
-    this.hero = hero;
-    this.keyboard = {
-      d: () => this.hero.moveRight(),
-      w: () => console.log('w'),
-      e: () => console.log('e'),
-      r: () => console.log('r'),
-      t: () => console.log('t'),
-      y: () => console.log('y'),
-    };
+
+// const keyboard = {
+//   q: () => this.hero.moveLeft(),
+//   w: () => this.hero.moveRight(),
+//   e: () => this.boomerang.moveRight(),
+//   r: () => console.log('r'),
+//   t: () => console.log('t'),
+//   y: () => console.log('y'),
+// };
+class Keyboards {
+  runInteractiveConsole(hero, boomerang) {
+    keypress(process.stdin);
+    process.stdin.on('keypress', (ch, key) => {
+      if (key) {
+        if (key.name === 'q') {
+          hero.moveLeft();
+        }
+        if (key.name === 'w') {
+          hero.moveRight();
+        }
+        if (key.name === 'e') {
+          boomerang.fly();
+        }
+        if (key.ctrl && key.name === 'c') {
+          process.exit();
+        }
+      }
+    });
+    process.stdin.setRawMode(true);
   }
 }
-
-// Какая-то функция.
-
-function runInteractiveConsole() {
-  keypress(process.stdin);
-  process.stdin.on('keypress', (ch, key) => {
-    if (key) {
-      // Вызывает команду, соответствующую нажатой кнопке.
-      if (key.name in this.keyboard) {
-        this.keyboard[key.name]();
-      }
-      // Прерывание программы.
-      if (key.ctrl && key.name === 'c') {
-        process.exit();
-      }
-    }
-  });
-  process.stdin.setRawMode(true);
-}
-
 // Давай попробуем запустить этот скрипт!
-runInteractiveConsole();
-module.exports = Run;
+
+// runInteractiveConsole();
+
+module.exports = Keyboards;
