@@ -1,6 +1,7 @@
 // Бумеранг является оружием.
 // В дальнейшем можно добавить другое оружие.
 // Тогда можно будет создать класс Weapon и воспользоваться наследованием!
+const player = require('play-sound')((opts = {}));
 
 class Boomerang {
   constructor({ position }) {
@@ -9,17 +10,14 @@ class Boomerang {
   }
 
   fly() {
-    // setInterval(() => {
-    //   this.moveRight();
-    // }, 200);
-
-    this.moveRight();
+    setInterval(() => {
+      this.moveRight();
+    }, 200);
+    player.play('src/sounds/just-like-magic.wav', (err) => {
+      if (err) console.log(err);
+    });
   }
-
-  // clear() {
-  //   clearInterval();
-  // }
-
+  clear() {}
   moveLeft() {
     this.position -= 1;
   }
@@ -27,7 +25,6 @@ class Boomerang {
   moveRight() {
     this.position += 1;
   }
-
   die() {
     this.position = '?';
   }

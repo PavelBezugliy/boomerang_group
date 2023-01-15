@@ -26,10 +26,7 @@ class Keyboards {
           hero.moveRight();
         }
         if (key.name === 'e') {
-          const set = setInterval(() => {
-            boomerang.moveRight();
-          }, 100);
-          // clearInterval();
+          boomerang.fly();
         }
         if (key.ctrl && key.name === 'c') {
           process.exit();

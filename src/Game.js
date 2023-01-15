@@ -1,6 +1,7 @@
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
+const player = require('play-sound')((opts = {}));
 
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
@@ -27,7 +28,7 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = (new Array(this.trackLength)).fill(' ');
+    this.track = new Array(this.trackLength).fill(' ');
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
     this.track[this.hero.position] = this.hero.skin;
@@ -42,20 +43,6 @@ class Game {
       this.enemy.position = 99;
       this.enemy.generateSkin();
       this.count += 10;
-      this.boomerang.die();
-    }
-
-    if (this.boomerang.position > this.hero.position + 15 || this.boomerang.position < this.hero.position) {
-      this.boomerang.die();
-    }
-
-    // if (this.boomerang.position > this.hero.position + 15) {
-    //   this.boomerang.position.moveLeft();
-    // }
-
-    if (this.boomerang.position === '?') {
-      this.track[this.boomerang.position] = this.boomerang.skin;
-      this.boomerang.position = this.hero.position;
     }
 
     // if (this.boomerang.die()) {
@@ -63,28 +50,17 @@ class Game {
     // }
   }
 
-  // boomFire() {
-  //   if (this.boomerang.position === '?') {
-  //     this.track[this.boomerang.position] = this.boomerang.skin;
-  //     this.boomerang.position = this.hero.position;
-  //   }
-
-  //   if (this.boomerang.position > this.hero.position + 5) {
-  //     this.boomerang.position.die();
-  //   }
-  // }
-
   play() {
     const name = process.argv[2];
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
-    // this.boomFire();
-
+    
     setInterval(() => {
       this.enemy.moveLeft();
       this.check();
       this.regenerateTrack();
       this.view.render(this.track, this.count, name);
     }, 200);
+    this.sound();
   }
 }
 
