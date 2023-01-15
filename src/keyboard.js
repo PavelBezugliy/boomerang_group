@@ -15,25 +15,19 @@ const keypress = require('keypress');
 //   y: () => console.log('y'),
 // };
 class Keyboards {
-
-  runInteractiveConsole(hodba, strelba) {
+  runInteractiveConsole(hero, boomerang) {
     keypress(process.stdin);
     process.stdin.on('keypress', (ch, key) => {
       if (key) {
-        // Вызывает команду, соответствующую нажатой кнопке.
         if (key.name === 'q') {
-          hodba.moveLeft();
+          hero.moveLeft();
         }
         if (key.name === 'w') {
-          hodba.moveRight();
+          hero.moveRight();
         }
         if (key.name === 'e') {
-          strelba.moveRight();
+          boomerang.fly();
         }
-        // if (key.name === '88') {
-        //   console.log('успех');
-        // }
-        // Прерывание программы.
         if (key.ctrl && key.name === 'c') {
           process.exit();
         }
@@ -45,7 +39,5 @@ class Keyboards {
 // Давай попробуем запустить этот скрипт!
 
 // runInteractiveConsole();
-
-module.exports = Keyboards;
 
 module.exports = Keyboards;
