@@ -49,13 +49,12 @@ class Game {
       this.boomerang.die();
     }
     if (this.boomerang.position === "?") {
-      this.track[this.boomerang.position] = -1;
+      this.track[this.boomerang.position] = this.boomerang.skin;
       this.boomerang.position = this.hero.position;
     }
   }
 
   play() {
-
     const name = process.argv[2];
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
 

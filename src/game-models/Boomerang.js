@@ -13,9 +13,6 @@ class Boomerang {
         this.moveRight();
     }, 200);
   }
-  clear() {
-
-  }
   moveLeft() {
     this.position -= 1;
   }

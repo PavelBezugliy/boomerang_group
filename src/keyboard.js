@@ -19,10 +19,10 @@ class Keyboards {
     keypress(process.stdin);
     process.stdin.on('keypress', (ch, key) => {
       if (key) {
-        if (key.name === 'q') {
+        if (key.name === 'a') {
           hero.moveLeft();
         }
-        if (key.name === 'w') {
+        if (key.name === 'd') {
           hero.moveRight();
         }
         if (key.name === 'e') {
