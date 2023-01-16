@@ -1,34 +1,30 @@
 {
-  "name": "core-async-boomerang",
+  "name": "boomerang_group",
   "version": "1.0.0",
-  "description": "Настало время разрабатывать лучшие в мире игры!",
+  "description": "## Введение Настало время разрабатывать лучшие в мире игры с футуристичной графикой и тщательно подуманной физикой! Что вам для этого надо? Emoji! И конечно же навыки работы с базами данных. Так же вам очень пригодятся ваши навыки работы с ООП.",
   "main": "run.js",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "find-exec": "^1.0.2",
-    "keypress": "^0.2.1",
-    "pg": "^8.7.3",
-    "pg-hstore": "^2.3.4",
-    "play-sound": "^1.1.5",
-    "sequelize": "^6.21.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.18.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Elbrus-Bootcamp/core-async-boomerang.git"
+    "url": "git+https://github.com/PavelBezugliy/boomerang_group.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Elbrus-Bootcamp/core-async-boomerang/issues"
+    "url": "https://github.com/PavelBezugliy/boomerang_group/issues"
   },
-  "homepage": "https://github.com/Elbrus-Bootcamp/core-async-boomerang#readme"
+  "homepage": "https://github.com/PavelBezugliy/boomerang_group#readme",
+  "dependencies": {
+    "cfonts": "^3.1.1",
+    "chalk": "^4.1.2",
+    "keypress": "^0.2.1",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "play-sound": "^1.1.5",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.5.2"
+  }
 }

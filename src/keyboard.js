@@ -25,7 +25,7 @@ class Keyboards {
         if (key.name === 'w') {
           hero.moveRight();
         }
-        if (key.name === 'e') {
+        if (key.name === 't') {
           boomerang.fly();
         }
         if (key.ctrl && key.name === 'c') {

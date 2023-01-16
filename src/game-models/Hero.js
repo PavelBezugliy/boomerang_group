@@ -1,10 +1,15 @@
 // Наш герой.
+
+const cfonts = require('cfonts');
+
+const prettyFont = cfonts.render('    You DIED!', { background: 'transparent' }).array.join('\n');
+
 const player = require('play-sound')((opts = {}));
 const chalk = require('chalk');
 
 class Hero {
   constructor() {
-    this.skin = '🤠'; // можете использовать любые emoji '💃'
+    this.skin = '😼'; // можете использовать любые emoji '💃'
     this.position = 2;
   }
 
@@ -19,14 +24,13 @@ class Hero {
 
   attack() {
     // Атакуем.
-    this.boomerang.fly();
   }
 
   die() {
     this.skin = '💀';
-    console.log(chalk.red('                                       Жалкое ничтожество!💀'));
+    console.log(chalk.red(prettyFont));
     console.log('\n');
-    player.play('src/sounds/congratulations.wav', (err) => {
+    player.play('src/sounds/najs-djemejdzh-najs-balans.mp3', (err) => {
       if (err) console.log(err);
     });
     process.exit();

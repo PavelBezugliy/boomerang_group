@@ -1,32 +1,35 @@
 // Бумеранг является оружием.
 // В дальнейшем можно добавить другое оружие.
+
+const { threadId } = require('worker_threads');
+
 // Тогда можно будет создать класс Weapon и воспользоваться наследованием!
 const player = require('play-sound')((opts = {}));
 
 class Boomerang {
   constructor({ position }) {
-    this.skin = '🌀';
+    this.skin = '🔥';
     this.position = position;
+    this.boomdie = '';
   }
 
   fly() {
-    setInterval(() => {
-      this.moveRight();
-    }, 200);
-    player.play('src/sounds/just-like-magic.wav', (err) => {
+    this.boomdie = setInterval(() => {
+      this.position += 1;
+    }, 100);
+    player.play('src/sounds/naa.mp3', (err) => {
       if (err) console.log(err);
     });
   }
-  clear() {}
+
   moveLeft() {
     this.position -= 1;
   }
 
-  moveRight() {
-    this.position += 1;
-  }
+  moveRight() {}
   die() {
     this.position = '?';
+    clearInterval(this.boomdie);
   }
 }
 

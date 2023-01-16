@@ -2,6 +2,7 @@
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
 const player = require('play-sound')((opts = {}));
+const { User } = require('../db/models');
 
 const Hero = require('./game-models/Hero');
 const Enemy = require('./game-models/Enemy');
@@ -35,24 +36,28 @@ class Game {
   }
 
   check() {
-    if (this.hero.position === this.enemy.position) {
+    if (this.hero.position === this.enemy.position - 1) {
       this.hero.die();
     }
-    if (this.boomerang.position === this.enemy.position) {
+    if (this.boomerang.position >= this.enemy.position - 1) {
       this.enemy.die();
       this.enemy.position = 99;
       this.enemy.generateSkin();
       this.count += 10;
       this.boomerang.die();
     }
+    if (this.boomerang.position < this.hero.position) {
+      this.boomerang.die();
+      this.boomerang.position = '?';
+    }
+
     if (
-      this.boomerang.position > this.hero.position + 10 ||
-      this.boomerang.position < this.hero.position
+      this.boomerang.position === '?' ||
+      this.boomerang.position > this.hero.position + 10
     ) {
       this.boomerang.die();
     }
     if (this.boomerang.position === '?') {
-      this.track[this.boomerang.position] = this.boomerang.skin;
       this.boomerang.position = this.hero.position;
     }
   }
@@ -65,6 +70,27 @@ class Game {
 
   play() {
     const name = process.argv[2];
+    async function createUser(user_name, score) {
+      try {
+        const user = await User.findOne({
+          where: { user_name: name },
+        });
+        if (!user) {
+          await User.create({ user_name: name, score: score });
+        }
+        // else {
+
+        //     await db.user.findOrCreate({
+        //       where: { user_name: name},
+        //       score: {this.hero.count },
+        //     });
+
+        //   }
+      } catch (e) {
+        console.log('Error message: ', e.message);
+      }
+    }
+    createUser(name, this.count);
     this.keyboard.runInteractiveConsole(this.hero, this.boomerang);
 
     setInterval(() => {
@@ -72,7 +98,7 @@ class Game {
       this.check();
       this.regenerateTrack();
       this.view.render(this.track, this.count, name);
-    }, 200);
+    }, 50);
     this.sound();
   }
 }
