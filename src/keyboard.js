@@ -19,14 +19,14 @@ class Keyboards {
     keypress(process.stdin);
     process.stdin.on('keypress', (ch, key) => {
       if (key) {
-        if (key.name === 'a') {
+        if (key.name === 'q') {
           hero.moveLeft();
         }
-        if (key.name === 'd') {
+        if (key.name === 'w') {
           hero.moveRight();
         }
         if (key.name === 'e') {
-          boomerang.fly();
+          boomerang.fly()
         }
         if (key.ctrl && key.name === 'c') {
           process.exit();
