@@ -2,7 +2,7 @@
 
 const cfonts = require('cfonts');
 
-const prettyFont = cfonts.render('You DIED!', { background: 'transparent' }).array.join('\n');
+const prettyFont = cfonts.render('    You DIED!', { background: 'transparent' }).array.join('\n');
 
 const player = require('play-sound')((opts = {}));
 const chalk = require('chalk');
